@@ -6,7 +6,7 @@ v-row(justify="center" align="center")
       v-card-text
         v-text-field(v-model="login.email" placeholder="Correo" outlined)
         v-text-field(v-model="login.password" placeholder="Contraseña" outlined)
-        v-btn(@click="doLogin") Login
+        v-btn(@click="doLogin" color="success" depressed block) Login
 </template>
 
 <script>

@@ -44,11 +44,6 @@ export default {
     '@nuxtjs/auth-next',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: 'http://localhost:8000/api/v1/', // Used as fallback if no runtime config is provided
-  },
-
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
@@ -102,4 +97,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  axios: {
+    baseURL: process.env.BASE_URL,
+  },
 }

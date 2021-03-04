@@ -26,7 +26,7 @@ export default {
       this.currentDate = formatDistanceToNowStrict(datetime, {
         addSuffix: true,
       })
-      this.currentDateRelative = formatRelative(new Date(), datetime)
+      this.currentDateRelative = formatRelative(datetime, new Date())
     },
   },
   mounted() {

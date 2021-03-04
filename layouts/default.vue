@@ -17,6 +17,10 @@ v-app
           v-list-item-title Salir
   v-app-bar(color="primary" clipped-left fixed dark app)
     v-toolbar-title Reto Intelligential
+    v-spacer
+    v-btn(:to="{ name: 'profile'}" text)
+      v-icon(left) mdi-account
+      | {{ $auth.user.email }}
   v-main
     v-container
       nuxt

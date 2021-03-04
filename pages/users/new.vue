@@ -5,8 +5,8 @@ v-card(:loading="loading" outlined)
     v-alert(v-model="error" type="error" text dismissible) ¡Hubo un error!
     v-text-field(v-model="user.email" label="Correo" placeholder="john.doe@gmail.com" outlined)
     v-select(v-model="user.role" label="Rol" :items="roles" outlined)
-    v-text-field(v-model="user.password" label="Contraseña" outlined)
-    v-text-field(v-model="passwordRepeat" label="Repetir contraseña" outlined)
+    v-text-field(v-model="user.password" type="password" label="Contraseña" outlined)
+    v-text-field(v-model="passwordRepeat" type="password" label="Repetir contraseña" outlined)
   v-card-actions
     v-spacer
     v-btn(color="success" text @click="save") Guardar

@@ -1,5 +1,5 @@
 <template lang="pug">
-v-card(:loading="loading" :disabled="disabled" outlined)
+v-card(:loading="loading" :disabled="loading" outlined)
   v-card-title Perfil
   v-card-text(v-if="error || success")
     v-alert(v-model="error" type="error" text dismissible) ¡Hubo un error!
@@ -7,6 +7,7 @@ v-card(:loading="loading" :disabled="disabled" outlined)
   v-card-text
     v-text-field(v-model="user.email" label="Correo electrónico" outlined)
     v-text-field(v-model="user.name" label="Nombre" outlined)
+    v-text-field(v-model="user.role" label="Rol" disabled outlined)
   v-card-text Cambiar contraseña
   v-card-text
     v-text-field(v-model="user.password" type="password" label="Contraseña" outlined)
@@ -26,6 +27,7 @@ export default {
       password: '',
     },
     password: '',
+    loading: false,
     error: false,
     success: false,
   }),

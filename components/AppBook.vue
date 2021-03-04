@@ -26,6 +26,8 @@ export default {
         await this.$axios.$post('loans', {
           books: [id],
         })
+
+        this.$router.push({ name: 'myloans' })
       } catch (error) {
         console.error(error)
       } finally {

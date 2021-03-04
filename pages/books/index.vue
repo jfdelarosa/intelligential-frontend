@@ -18,6 +18,8 @@ div
           tr
             th SKU
             th Nombre
+            th Autor
+            th ¿En stock?
             th Fecha de registro
             th Último préstamo
             th Opciones
@@ -25,6 +27,8 @@ div
           tr(v-for="book in books" :key="book.id")
             td {{ book.id }}
             td {{ book.name }}
+            td {{ book.author }}
+            td {{ book.stock ? "Sí" : "No" }}
             td
               TimeAgo(:datetime="book.createdAt")
             td
@@ -32,9 +36,10 @@ div
             td
               v-tooltip(bottom)
                 template(v-slot:activator="{ on, attrs }")
-                  v-btn(v-bind="attrs" v-on="on" @click="remove(book.id)" color="red" icon)
+                  v-btn(v-bind="attrs" v-on="on" @click="remove(book)" :color="book.stock ? 'red' : ''" icon)
                     v-icon mdi-delete-outline
-                span Eliminar
+                span(v-if="book.stock") Eliminar
+                span(v-else) No puedes eliminar un libro hasta que sea devuelto
 
     v-card-text(v-else) No hay Libros registrados
 </template>
@@ -56,8 +61,11 @@ export default {
         name: 'books-new',
       })
     },
-    async remove(id) {
+    async remove({ id, stock }) {
       try {
+        if (!stock) {
+          return
+        }
         await this.$axios.delete(`books/${id}`)
         this.books = this.books.filter((item) => item.id !== id)
       } catch (error) {}

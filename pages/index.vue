@@ -2,19 +2,19 @@
 v-card(:loading="loading" outlined)
   v-card-title Búsqueda
   v-card-text
-    v-text-field(v-model="query" @input="search" placeholder="Buscar libro" outlined)
-    v-row
+    v-text-field(
+      v-model="query" placeholder="Buscar libro" outlined)
+    v-row(v-if="results.length")
       v-col(:cols="4" v-for="book in results" :key="book.id")
-        v-card(@click="view(book.id)" outlined)
-          v-card-title {{ book.name }}
-          v-card-text {{ book.description }}
-          v-card-actions
-            v-spacer
-            v-btn(color="success" @click="loan(book.id)" text) Solicitar préstamo
+        AppBook(:book="book")
+    v-card-text(v-if="query && results.length === 0 && !loading") Sin resultados
 </template>
 
 <script>
+import AppBook from '@/components/AppBook'
+
 export default {
+  components: { AppBook },
   data: () => ({
     query: '',
     timer: null,
@@ -34,7 +34,7 @@ export default {
   methods: {
     debouncedSearch() {
       clearTimeout(this.timer)
-
+      this.loading = true
       this.timer = setTimeout(async () => {
         await this.search()
       }, 500)
@@ -48,15 +48,6 @@ export default {
       } finally {
         this.loading = false
       }
-    },
-    async loan(id) {
-      // await this.
-    },
-    view(id) {
-      this.$router.push({
-        name: 'books-id',
-        params: { id },
-      })
     },
   },
 }

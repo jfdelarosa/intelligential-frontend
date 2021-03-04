@@ -3,6 +3,7 @@ v-card(:loading="loading" outlined)
     v-card-title Nuevo libro
     v-card-text
       v-text-field(v-model="book.name" label="Nombre" placeholder="Nombre" outlined)
+      v-text-field(v-model="book.author" label="Autor" placeholder="Autor" outlined)
       v-textarea(v-model="book.description" label="Descripción" placeholder="Descripción" outlined)
     v-card-actions
       v-spacer
@@ -13,6 +14,7 @@ v-card(:loading="loading" outlined)
 export default {
   data: () => ({
     book: {
+      author: '',
       name: '',
       description: '',
     },
@@ -22,7 +24,7 @@ export default {
     async save() {
       try {
         this.loading = true
-        const requiredFields = ['name']
+        const requiredFields = ['author', 'name']
 
         for (let key in this.book) {
           if (this.book[key] === '' && requiredFields.includes(key)) {

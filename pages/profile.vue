@@ -5,6 +5,7 @@ v-card(:loading="loading" :disabled="loading" outlined)
     v-alert(v-model="error" type="error" text dismissible) ¡Hubo un error!
     v-alert(v-model="success" type="success" text dismissible) ¡Usuario actualizado correctamente!
   v-card-text
+    pre {{ user }}
     v-text-field(v-model="user.email" label="Correo electrónico" outlined)
     v-text-field(v-model="user.name" label="Nombre" outlined)
     v-text-field(v-model="user.role" label="Rol" disabled outlined)
@@ -38,12 +39,12 @@ export default {
         this.success = false
         this.loading = true
 
-        if (this.user.password === '' && this.password === '') {
-          delete this.user.password
-        }
-
         if (this.user.password !== this.password) {
           throw new Error('Las contraseñas no coinciden')
+        }
+
+        if (this.user.password === '' && this.password === '') {
+          delete this.user.password
         }
 
         await this.$axios.$put(`users/${this.user.id}`, this.user)
